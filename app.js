@@ -33,6 +33,7 @@ app.get('/', routes.index);
 app.get('/blog/new', routes.blog_new);
 app.post('/blog/new', routes.blog_new_post);
 app.get('/blog/:id', routes.blog_id);
+app.post('/blog/addComment', routes.blog_addcomment_post);
 
 app.listen(3000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

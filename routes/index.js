@@ -27,6 +27,16 @@ exports.blog_new_post = function(req, res) {
 
 exports.blog_id = function(req, res) {
   articleProvider.findById(req.params.id, function(error, article) {
-    res.render('blog_show', {title: 'article.title', article:article});
+    res.render('blog_show', {title: article.title, article:article});
+  });
+};
+
+exports.blog_addcomment_post = function(req, res) {
+  articleProvider.addCommentToArticle(req.param('_id'), {
+    person: req.param('person'),
+    comment: req.param('comment'),
+    created_at: new Date()
+  }, function(error, docs) {
+    res.redirect('/blog/' + req.param('_id'))
   });
 };
