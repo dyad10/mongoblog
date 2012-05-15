@@ -1,6 +1,6 @@
-var ArticleProvider = require('../articleprovider-memory').ArticleProvider;
+var ArticleProvider = require('../articleprovider-mongodb').ArticleProvider;
 
-var articleProvider = new ArticleProvider();
+var articleProvider = new ArticleProvider('localhost', 27017);
 
 /*
  * GET home page.
@@ -22,5 +22,11 @@ exports.blog_new_post = function(req, res) {
     body: req.param('body')
   }, function( error, docs) {
     res.redirect('/')
+  });
+};
+
+exports.blog_id = function(req, res) {
+  articleProvider.findById(req.params.id, function(error, article) {
+    res.render('blog_show', {title: 'article.title', article:article});
   });
 };
